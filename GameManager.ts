@@ -30,7 +30,7 @@ class GameManager {
     }
 
     private onUpdateIntervals(): void {
-        game.onUpdateInterval(2000, function() {
+        game.onUpdateInterval(2000, function(): void {
             let bat = new EnemySprite(assets.image`bat`);
             bat.position_bat(this.me.sprite);
             bat.handle_movement(this.me.sprite);
@@ -38,7 +38,7 @@ class GameManager {
     }
 
     private onOverlaps(): void {
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(me: Sprite, bat: Sprite) {
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(me: Sprite, bat: Sprite): void {
             info.changeLifeBy(-1)
             pause(2000)
         })

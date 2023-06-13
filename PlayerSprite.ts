@@ -1,8 +1,8 @@
 class PlayerSprite extends BaseSprite {
 
     private gameManager: GameManager;
-    private sword: SwordSprite;
     private jumpCount: number;
+    public sword: SwordSprite;
     public attacking: boolean;
 
     constructor(playerImage: Image, gameManager: GameManager) {
@@ -15,9 +15,6 @@ class PlayerSprite extends BaseSprite {
 
     private registerSword() {
         this.sword = new SwordSprite(assets.image`sword right`, this);
-        game.onUpdate(function(): void {
-            this.sword.playerTracking();
-        });
     }
 
     private jump(): void {
@@ -46,7 +43,7 @@ class PlayerSprite extends BaseSprite {
         this.attacking = false;
     }
 
-    private handle_x_movement(): void {
+    public handleXMovement(): void {
         if (controller.left.isPressed()) {
             this.sprite.vx -= 10;
             this.sprite.setImage(assets.image`me left`);
@@ -57,7 +54,7 @@ class PlayerSprite extends BaseSprite {
         this.sprite.vx *= 0.9;
     }
 
-    private handle_y_movement() {
+    public handleYMovement() {
         this.sprite.vy += this.gameManager.gravity;
         if (this.sprite.isHittingTile(CollisionDirection.Bottom)) {
             this.sprite.vy = 0
@@ -73,10 +70,5 @@ class PlayerSprite extends BaseSprite {
         controller.A.onEvent(ControllerButtonEvent.Pressed, function(): void {
             this.throttleAttack();
         })
-
-        game.onUpdate(function () {
-            this.handle_x_movement();
-            this.handle_y_movement();
-        });
     }
 }

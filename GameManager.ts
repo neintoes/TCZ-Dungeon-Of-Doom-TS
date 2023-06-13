@@ -14,13 +14,9 @@ class GameManager {
         this.tileMapLevels = tilemapsToLoad;
         this.setupPlayer();
         this.setupScene();
+        this.onUpdates();
         this.onUpdateIntervals();
         this.onOverlaps();
-    }
-
-    private setupScene(): void {
-        this.tileMap = new TilemapManager(this.tileMapLevels[this.level], this.me);
-        this.tileMap.buildLevel();
     }
 
     private setupPlayer(): void {
@@ -29,11 +25,26 @@ class GameManager {
         scene.cameraFollowSprite(this.me.sprite);
     }
 
+    private setupScene(): void {
+        this.tileMap = new TilemapManager(this.tileMapLevels[this.level], this.me);
+        this.tileMap.buildLevel();
+    }
+
+    private onUpdates(): void {
+        game.onUpdate(function(): void {
+            // player movement updates
+            this.me.handleXMovement();
+            this.me.handleYMovement();
+            //sword tracking update
+            this.me.sword.playerTracking();
+        });
+    }
+
     private onUpdateIntervals(): void {
         game.onUpdateInterval(2000, function(): void {
             let bat = new EnemySprite(assets.image`bat`);
-            bat.position_bat(this.me.sprite);
-            bat.handle_movement(this.me.sprite);
+            bat.positionBat(this.me.sprite);
+            bat.handleMovement(this.me.sprite);
         })
     }
 
@@ -50,5 +61,4 @@ class GameManager {
             }
         })
     }
-
 }

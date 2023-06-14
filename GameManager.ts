@@ -1,5 +1,8 @@
 namespace SpriteKind {
     export const Sword: any = SpriteKind.create();
+    //GH 1
+    export const Shield: any = SpriteKind.create();
+    //end GH 1 
 }
 
 class GameManager {
@@ -50,6 +53,11 @@ class GameManager {
 
     private onOverlaps(): void {
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(me: Sprite, bat: Sprite): void {
+            // GH1 
+            if(me.overlapsWith(this.me.shield.sprite)) {
+                return;
+            }
+            // end GH1
             info.changeLifeBy(-1)
             pause(2000)
         })
@@ -60,5 +68,23 @@ class GameManager {
                 bat.destroy()
             }
         })
+
+        // GH1
+        sprites.onOverlap(SpriteKind.Shield, SpriteKind.Enemy, function(shield: Sprite, enemy: Sprite): void {
+            tilesAdvanced.followUsingPathfinding(enemy, this.me.sprite, 0);
+            let x_vel : number;
+            if(shield.image.equals(assets.image`shield left`)) {
+                x_vel = -100;
+            } else {
+                x_vel = 100;
+            }
+            for(let i = 0; i < 10; i++) {
+                enemy.vx = x_vel;
+                pause(10);
+            }
+            pause(500);
+            tilesAdvanced.followUsingPathfinding(enemy, this.me.sprite, 50);
+        });
+        // end GH1
     }
 }

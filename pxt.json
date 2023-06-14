@@ -12,7 +12,6 @@
         "main.blocks",
         "main.ts",
         "assets.json",
-        "main.py",
         "tilemap.g.jres",
         "tilemap.g.ts",
         "BaseSprite.ts",
@@ -22,7 +21,8 @@
         "PlayerSprite.ts",
         "images.g.jres",
         "images.g.ts",
-        "SwordSprite.ts"
+        "SwordSprite.ts",
+        "ShieldSprite.ts"
     ],
     "testFiles": [
         "test.ts"

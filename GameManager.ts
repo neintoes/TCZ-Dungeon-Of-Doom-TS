@@ -59,16 +59,9 @@ class GameManager {
 
         // GH2
         //torch flicker
-        // game.onUpdateInterval(200, function(): void {
-        //     let anim = assets.animation`torch flicker`;
-        //     this.tilesToAnimate.foreach(function(tile: tiles.Location){
-        //         tiles.setTileAt(tile, anim.get(this.torchFrame));
-        //     });
-        //     this.torchFrame += 1;
-        //     if (this.torchFrame == anim.length - 1) {
-        //         this.torchFrame = 0;
-        //     }
-        // })
+        game.onUpdateInterval(200, function(): void {
+            this.torchFlicker();
+        })
         // end GH2
     }
 
@@ -108,4 +101,17 @@ class GameManager {
         });
         // end GH1
     }
+
+    // GH2
+    private torchFlicker(): void {
+        let anim = assets.animation`torch flicker`;
+        this.tilesToAnimate.forEach(function (tile: tiles.Location) {
+            tiles.setTileAt(tile, anim.get(this.torchFrame));
+        });
+        this.torchFrame += 1;
+        if (this.torchFrame == anim.length - 1) {
+            this.torchFrame = 0;
+        }
+    }
+    // end GH2
 }

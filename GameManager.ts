@@ -9,15 +9,14 @@ class GameManager {
     public level: number = 0;
     private me: PlayerSprite;
     private tileMap: TilemapManager;
-    private tileMapLevels: tiles.TileMapData[];
-    public gravity: number = 8;
+    private tilemapLevels: tiles.TileMapData[];
     // GH2
-    private torchFrame: number = 0;
-    private tilesToAnimate: tiles.Location[];
+    private tilemapTorches: TilemapTorches;
     // end GH2
+    public gravity: number = 8;
 
     constructor(tilemapsToLoad: tiles.TileMapData[]) {
-        this.tileMapLevels = tilemapsToLoad;
+        this.tilemapLevels = tilemapsToLoad;
         this.setupPlayer();
         this.setupScene();
         this.onUpdates();
@@ -32,10 +31,10 @@ class GameManager {
     }
 
     private setupScene(): void {
-        this.tileMap = new TilemapManager(this.tileMapLevels[this.level], this.me);
+        this.tileMap = new TilemapManager(this.tilemapLevels[this.level], this.me);
         this.tileMap.buildLevel();
         // GH2
-        this.tilesToAnimate = tiles.getTilesByType(assets.tile`torch`);
+        this.tilemapTorches = new TilemapTorches();
         // end GH2
     }
 
@@ -60,7 +59,7 @@ class GameManager {
         // GH2
         //torch flicker
         game.onUpdateInterval(200, function(): void {
-            this.torchFlicker();
+            this.tilemapTorches.flicker();
         })
         // end GH2
     }
@@ -101,17 +100,4 @@ class GameManager {
         });
         // end GH1
     }
-
-    // GH2
-    private torchFlicker(): void {
-        let anim = assets.animation`torch flicker`;
-        this.tilesToAnimate.forEach(function (tile: tiles.Location) {
-            tiles.setTileAt(tile, anim.get(this.torchFrame));
-        });
-        this.torchFrame += 1;
-        if (this.torchFrame == anim.length - 1) {
-            this.torchFrame = 0;
-        }
-    }
-    // end GH2
 }

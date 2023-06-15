@@ -22,7 +22,8 @@
         "images.g.jres",
         "images.g.ts",
         "SwordSprite.ts",
-        "ShieldSprite.ts"
+        "ShieldSprite.ts",
+        "TilemapTorches.ts"
     ],
     "testFiles": [
         "test.ts"

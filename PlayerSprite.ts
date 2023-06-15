@@ -2,6 +2,9 @@ class PlayerSprite extends BaseSprite {
 
     private gameManager: GameManager;
     private jumpCount: number;
+    // GH3
+    private dashEffect: DashEffect;
+    // end GH3
     public sword: SwordSprite;
     // GH1
     public shield: ShieldSprite;
@@ -17,6 +20,9 @@ class PlayerSprite extends BaseSprite {
         // GH1
         this.registerShield();
         // end GH1
+        // GH3
+        this.registerDashEffect()
+        // end GH3
     }
 
     private registerSword(): void {
@@ -29,12 +35,34 @@ class PlayerSprite extends BaseSprite {
     }
     // end GH1
 
+    // GH3
+    private registerDashEffect(): void {
+        this.dashEffect = new DashEffect(assets.image`dash right`, this);
+    } 
+    // end GH3
+
     private jump(): void {
         if(this.jumpCount < 2){
             this.sprite.vy = -175;
             this.jumpCount += 1;
         }
     }
+
+    // GH3
+    private dashLeft(): void {
+        this.sprite.vx = -300;
+        timer.background(function(): void {
+            this.dashEffect.dashAnim();
+        });
+    }
+
+    private dashRight(): void {
+        this.sprite.vx = 300;
+        timer.background(function (): void {
+            this.dashEffect.dashAnim();
+        });
+    }
+    //end GH3
 
     private attack(): void {
         timer.background(function(): void {
@@ -112,5 +140,15 @@ class PlayerSprite extends BaseSprite {
             this.defend();
         })
         // end GH1
+
+        // GH3
+        controller.combos.attachCombo("ll", function(): void {
+            this.dashLeft();
+        })
+
+        controller.combos.attachCombo("rr", function (): void {
+            this.dashRight();
+        })
+        // end GH3
     }
 }

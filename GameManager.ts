@@ -3,6 +3,9 @@ namespace SpriteKind {
     //GH 1
     export const Shield: any = SpriteKind.create();
     //end GH 1 
+    // GH3
+    export const Effect: any = SpriteKind.create();
+    // end GH3
 }
 
 class GameManager {

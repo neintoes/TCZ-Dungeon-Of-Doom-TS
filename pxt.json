@@ -6,7 +6,8 @@
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.3.1",
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
         "Tiles Advanced": "github:Ashalls/TCZ-Modders-Tilemaps-Advanced#v1.2.3",
-        "Timers": "github:microsoft/arcade-timers#v1.1.0"
+        "Timers": "github:microsoft/arcade-timers#v1.1.0",
+        "pxt-button-combos": "github:jwunderl/pxt-button-combos#v0.0.24"
     },
     "files": [
         "main.blocks",
@@ -22,7 +23,8 @@
         "images.g.jres",
         "images.g.ts",
         "SwordSprite.ts",
-        "ShieldSprite.ts"
+        "ShieldSprite.ts",
+        "DashEffect.ts"
     ],
     "testFiles": [
         "test.ts"

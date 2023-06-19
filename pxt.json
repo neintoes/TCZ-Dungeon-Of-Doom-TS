@@ -24,7 +24,8 @@
         "images.g.ts",
         "SwordSprite.ts",
         "ShieldSprite.ts",
-        "DashEffect.ts"
+        "DashEffect.ts",
+        "OverlapManager.ts"
     ],
     "testFiles": [
         "test.ts"

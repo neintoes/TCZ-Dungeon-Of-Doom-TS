@@ -1,11 +1,6 @@
 class OverlapManager {
 
-    private gameManager: GameManager;
-    private playerSprite: PlayerSprite;
-
     constructor(gameManager: GameManager) {
-        this.gameManager = gameManager;
-        this.playerSprite = gameManager.playerSprite;
         this.registerOverlaps();
     }
 
@@ -13,7 +8,7 @@ class OverlapManager {
 
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (playerSprite: Sprite, bat: Sprite): void {
             // GH1 
-            if (playerSprite.overlapsWith(this.playerSprite.shield.sprite)) {
+            if (playerSprite.overlapsWith(playerSprite.data.shield.sprite)) {
                 return;
             }
             // end GH1
@@ -22,7 +17,8 @@ class OverlapManager {
         })
 
         sprites.onOverlap(SpriteKind.Sword, SpriteKind.Enemy, function (sword: Sprite, bat: Sprite): void {
-            if (this.playerSprite.attacking) {
+            // if (this.playerSprite.attacking) {
+            if (sword.data.playerSprite.attacking) {
                 info.changeScoreBy(100)
                 bat.destroy()
             }
@@ -30,7 +26,7 @@ class OverlapManager {
 
         // GH1
         sprites.onOverlap(SpriteKind.Shield, SpriteKind.Enemy, function (shield: Sprite, enemy: Sprite): void {
-            tilesAdvanced.followUsingPathfinding(enemy, this.playerSprite.sprite, 0);
+            tilesAdvanced.followUsingPathfinding(enemy, shield.data.playerSprite.sprite, 0);
             let x_vel: number;
             if (shield.image.equals(assets.image`shield left`)) {
                 x_vel = -100;
@@ -42,7 +38,7 @@ class OverlapManager {
                 pause(10);
             }
             pause(500);
-            tilesAdvanced.followUsingPathfinding(enemy, this.playerSprite.sprite, 50);
+            tilesAdvanced.followUsingPathfinding(enemy, shield.data.playerSprite.sprite, 50);
         });
         // end GH1
     }

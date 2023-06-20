@@ -1,9 +1,10 @@
 // GH1
 class ShieldSprite extends BaseSprite {
-    private playerSprite: PlayerSprite;
+    public playerSprite: PlayerSprite;
 
     constructor(shieldImage: Image, playerSprite: PlayerSprite) {
         super(shieldImage, SpriteKind.Shield);
+        this.playerSprite = playerSprite;
         this.sprite.setFlag(SpriteFlag.Invisible, true);
         this.sprite.setFlag(SpriteFlag.GhostThroughSprites, true);
     }

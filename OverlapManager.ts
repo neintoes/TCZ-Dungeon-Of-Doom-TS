@@ -1,6 +1,6 @@
 class OverlapManager {
 
-    constructor(gameManager: GameManager) {
+    constructor() {
         this.registerOverlaps();
     }
 

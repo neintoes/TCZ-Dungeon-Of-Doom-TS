@@ -26,7 +26,7 @@ class GameManager {
         this.setupScene();
         this.onUpdates();
         this.onUpdateIntervals();
-        this.overlapManager = new OverlapManager(this);
+        this.overlapManager = new OverlapManager();
     }
 
     private setupPlayer(): void {

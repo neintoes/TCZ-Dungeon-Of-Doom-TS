@@ -1,10 +1,10 @@
 namespace SpriteKind {
-    export const Sword: any = SpriteKind.create();
+    export const Sword: number = SpriteKind.create();
     //GH 1
-    export const Shield: any = SpriteKind.create();
+    export const Shield: number = SpriteKind.create();
     //end GH 1 
     // GH3
-    export const Effect: any = SpriteKind.create();
+    export const Effect: number = SpriteKind.create();
     // end GH3
 }
 
